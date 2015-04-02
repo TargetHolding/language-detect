@@ -1,6 +1,6 @@
 <?php
 
-namespace \PrinsHerbert
+namespace PrinsHerbert;
 
 class LanguageDetect
 {
