@@ -14,6 +14,6 @@
     },
     "require": {
         "php": ">=5.3",
-        "php-pspell": ">=0.50.5"
+        "ext-pspell": ">=0.50.5"
     }
 }
