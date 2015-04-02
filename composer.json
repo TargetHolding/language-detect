@@ -4,7 +4,7 @@
     "license": "GPL",
     "authors": [
         {
-            "name": "Herbert Kruitbosch",
+            "name": "Herbert Kruitbosch"
         }
     ],
     "autoload": {
@@ -14,6 +14,6 @@
     },
     "require": {
         "php": ">=5.3",
-        "php-pspell": ">=0.50.5",
+        "php-pspell": ">=0.50.5"
     }
 }
