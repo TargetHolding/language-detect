@@ -1,0 +1,19 @@
+{
+    "name": "prinsherbert/language-detect",
+    "description": "Detect the language of a string",
+    "license": "GPL",
+    "authors": [
+        {
+            "name": "Herbert Kruitbosch",
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "PrinsHerbert\\": "src/"
+        }
+    },
+    "require": {
+        "php": ">=5.3",
+        "php-pspell": ">=0.50.5",
+    }
+}
