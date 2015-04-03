@@ -23,7 +23,7 @@ class LanguageDetect
           $dictionary = enchant_broker_request_dict($r, $locale);
           return  array_sum(
             array_map(
-              function ($word) use ($pspell_link) {
+              function ($word) use ($pspell_link, $dictionary) {
                 return enchant_dict_check($dictionary, $word)  ? 1 : 0;
               }, $words[0]
             )
