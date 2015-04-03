@@ -8,29 +8,33 @@ class LanguageDetect
    * Detect language of a text
    * 
    * @param string $text
-   * @param array  $languages
-   * @return array mapping each language in $languages to number of words in $text which are spelled correctly according to the language, the entry 'total' will be set to the total number of words.
+   * @param array  $locales
+   * @return array mapping each locale in $locales to number of words in $text which are spelled correctly according to the locale, the entry 'total' will be set to the total number of words.
    * @author Herbert Kruitbosch
    */
-  static function detect($text, $languages) {
+  static function detect($text, $locales) {
     $words = array();
     preg_match_all('/([a-zA-Z]|\xC3[\x80-\x96\x98-\xB6\xB8-\xBF]|\xC5[\x92\x93\xA0\xA1\xB8\xBD\xBE]){2,}/', $text, $words, PREG_PATTERN_ORDER);
     
-    $classification = array_combine($languages,
+    $r = enchant_broker_init();
+    $classification = array_combine($locales,
       array_map(
-        function ($language) use ($words) {
-          $pspell_link = pspell_new($language);
+        function ($locale) use ($words,$r) {
+          $dictionary = enchant_broker_request_dict($r, $locale);
           return  array_sum(
             array_map(
               function ($word) use ($pspell_link) {
-                return pspell_check($pspell_link, $word) ? 1 : 0;
+                return enchant_dict_check($dictionary, $word)  ? 1 : 0;
               }, $words[0]
             )
           );
-        }, $languages
+        }, $locales
       )
     );
+    enchant_broker_free($r);
+    
     $classification["total"] = count($words[0]);
+    
     return $classification;
   }
 }
