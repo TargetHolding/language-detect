@@ -21,6 +21,8 @@ class LanguageDetect
       array_map(
         function ($locale) use ($words,$r) {
           $dictionary = enchant_broker_request_dict($r, $locale);
+          if ($dictionary === false)
+              throw new \Exception("Dictionary " . $locale . " not installed, install the right aspell (or other enchant backend) package.");
           return  array_sum(
             array_map(
               function ($word) use ($dictionary) {
